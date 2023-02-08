@@ -11,6 +11,9 @@ class Homepage extends React.Component {
       <>
         <HeroSection></HeroSection>
         <CardSection></CardSection>
-
-
+        <AboutUsSection></AboutUsSection>
+        <PlanningAdapSection></PlanningAdapSection>
+    </>
+  )}
+}
 export default Homepage;
