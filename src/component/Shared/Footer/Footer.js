@@ -12,7 +12,7 @@ const Footer = () => {
             <Col className="text-center">
               <Nav>
                 <Nav.Link href="#">About</Nav.Link>
-                <Nav.Link href="#">Contact</Nav.Link>
+                <Nav.Link href="#">Contact us</Nav.Link>
                 <Nav.Link href="#">Terms</Nav.Link>
                 <Nav.Link href="#">Privacy</Nav.Link>
               </Nav>
