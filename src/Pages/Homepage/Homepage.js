@@ -5,13 +5,15 @@ import CardSection from "../../component/CardSection";
 import HeroSection from "../../component/HeroSection";
 import PlanningAdapSection from "../../component/PlanningAdapSection";
 
-const Homepage = () => {
-    return <>
+class Homepage extends React.Component {
+  render() {
+    return (
+      <>
         <HeroSection></HeroSection>
         <CardSection></CardSection>
         <AboutUsSection></AboutUsSection>
         <PlanningAdapSection></PlanningAdapSection>
     </>
-};
-
+  )}
+}
 export default Homepage;
