@@ -17,7 +17,7 @@ const HeroSection = () => {
 
         <div className="carousel-inner">
 
-            <div className="carousel-item active bg-dark bg-opacity-75">
+            <div className="carousel-item active bg-dark bg-opacity-50">
                 <img src={Banner1} className="d-block w-100"
                     alt="Sunset Over the City" />
                 <div className="carousel-caption d-none d-md-block">
