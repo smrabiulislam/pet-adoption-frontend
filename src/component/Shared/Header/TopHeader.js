@@ -7,6 +7,7 @@ import {
   FaInstagramSquare,
   FaEnvelope,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 class TopHeader extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class TopHeader extends React.Component {
         <Container>
           <div className="d-flex justify-content-between align-items-center w-100">
             <div className="text-light">
-              Welcome, <span className="text-light">Default Name</span>
+              Welcome, <Link to='/profile' className="text-light">Default Name</Link>
             </div>
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div>

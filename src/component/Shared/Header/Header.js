@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+
 import TopHeader from "./TopHeader";
 // import NavDropdown from "react-bootstrap/NavDropdown";
 class Header extends React.Component {
+
   render() {
     return (
       <>
@@ -30,15 +32,14 @@ class Header extends React.Component {
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link
-                  href="#action1"
-                  className="d-flex align-items-center justify-content-center ps-3 pe-3"
-                >
-                  Pet&#39;s
+
+                <Nav.Link href='/signin'>
+                  <Button variant="outline-primary" >Login</Button>
                 </Nav.Link>
-                <Nav.Link href="#action2">
-                  <Button variant="outline-primary">Login</Button>
-                </Nav.Link>
+
+
+
+
                 <Nav.Link href="#action2">
                   <Button variant="outline-primary">Signup</Button>
                 </Nav.Link>
@@ -56,6 +57,8 @@ class Header extends React.Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+
+
       </>
     );
   }
