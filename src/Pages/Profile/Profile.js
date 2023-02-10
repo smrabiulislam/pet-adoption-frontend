@@ -29,14 +29,15 @@ class Profile extends React.Component {
                                         <div class="profile-header-info">
                                             <h4 class="m-t-10 m-b-5">Md Shijan Ali</h4>
                                             <p class="m-b-10">UXUI + Frontend Developer</p>
-                                            <NavLink to="/edit" class="btn btn-sm btn-info mb-2">Edit Profile</NavLink>
+                                            <NavLink to="/settings" class="btn btn-sm btn-info mb-2">Edit Profile</NavLink>
                                         </div>
 
                                     </div>
 
                                     <ul class="profile-header-tab nav nav-tabs">
+                                        <li class="nav-item"><NavLink to="/profile" class="">PROFILE</NavLink></li>
                                         <li class="nav-item"><NavLink to="/my-posts" class="">MY POSTS</NavLink></li>
-                                        <li class="nav-item"><NavLink to="/about" class="">ABOUT</NavLink></li>
+
                                         <li class="nav-item"><NavLink to="/settings" class="">SETTINGS</NavLink></li>
 
                                         <li class="nav-item"><NavLink to="/add-pet" class="">ADD PETS</NavLink></li>

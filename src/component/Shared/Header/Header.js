@@ -15,7 +15,7 @@ class Header extends React.Component {
         <TopHeader></TopHeader>
         <Navbar bg="light" expand="lg" sticky="top">
           <Container className="container-lg">
-            <Navbar.Brand href="#">Pet Adoption</Navbar.Brand>
+            <Navbar.Brand href='/'>Pet Adoption</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Form className="d-flex w-100 justify-content-center">

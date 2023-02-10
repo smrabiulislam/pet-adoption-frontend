@@ -8,8 +8,10 @@ import Homepage from "../../Pages/Homepage/Homepage";
 import About from "../../Pages/Profile/About/About";
 import AddPet from "../../Pages/Profile/AddPet/AddPet";
 import MyPosts from "../../Pages/Profile/MyPosts/MyPosts";
-import Profile from "../../Pages/Profile/Profile";
+
+import ProfilePage from "../../Pages/Profile/ProfilePage/ProfilePage";
 import Settings from "../../Pages/Profile/Settings/Settings";
+import SinglePetPage from "../../Pages/Profile/SinglePetPage/SinglePetPage";
 
 
 const router = createBrowserRouter([
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
 
       {
         path: '/profile',
-        element: <Profile></Profile>
+        element: <ProfilePage></ProfilePage>
       },
       {
         path: '/add-pet',
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
       , {
         path: '/settings',
         element: <Settings></Settings>
+      },
+      {
+        path: '/singlepetpage',
+        element: <SinglePetPage></SinglePetPage>
       }
 
     ],
