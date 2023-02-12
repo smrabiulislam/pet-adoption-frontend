@@ -4,6 +4,7 @@ import CardSection from "../../component/CardSection";
 
 import HeroSection from "../../component/HeroSection";
 import PlanningAdapSection from "../../component/PlanningAdapSection";
+import LoginForm from "../../component/Signin/Signin";
 
 class Homepage extends React.Component {
   render() {
@@ -13,7 +14,8 @@ class Homepage extends React.Component {
         <CardSection></CardSection>
         <AboutUsSection></AboutUsSection>
         <PlanningAdapSection></PlanningAdapSection>
-    </>
-  )}
+      </>
+    );
+  }
 }
 export default Homepage;

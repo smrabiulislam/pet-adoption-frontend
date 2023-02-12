@@ -1,66 +1,69 @@
 import React, { Component } from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 
-class Signin extends Component {
-  constructor(props) {
-    super(props);
+import toast from "react-hot-toast";
 
-    this.state = {
-      showModal: false,
-    };
+class LoginForm extends Component {
+  state = {
+    username: "",
+    password: "",
+  };
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-  }
-
-  handleClose() {
+  handleChange = (e) => {
     this.setState({
-      showModal: false,
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  handleShow() {
-    this.setState({
-      showModal: true,
-    });
-  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    fetch("http://localhost:5000/signin", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(this.state),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("Now you are our member!");
+        }
+      });
+  };
 
   render() {
     return (
-      <>
-        <Button variant="primary" onClick={this.handleShow}>
-          Login
-        </Button>
-
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary">Login</Button>
-          </Modal.Footer>
-        </Modal>
-      </>
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
     );
   }
 }
 
-export default Signin;
+export default LoginForm;

@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import LoginForm from "../../component/Signin/Signin";
 import Signin from "../../component/Signin/Signin";
 import Signup from "../../component/Signup/Signup";
 import Main from "../../Layout/Main";
@@ -12,7 +13,6 @@ import MyPosts from "../../Pages/Profile/MyPosts/MyPosts";
 import ProfilePage from "../../Pages/Profile/ProfilePage/ProfilePage";
 import Settings from "../../Pages/Profile/Settings/Settings";
 import SinglePetPage from "../../Pages/Profile/SinglePetPage/SinglePetPage";
-
 
 const router = createBrowserRouter([
   {
@@ -34,30 +34,29 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/profile',
-        element: <ProfilePage></ProfilePage>
+        path: "/profile",
+        element: <ProfilePage></ProfilePage>,
       },
       {
-        path: '/add-pet',
-        element: <AddPet></AddPet>
+        path: "/add-pet",
+        element: <AddPet></AddPet>,
       },
       {
-        path: '/my-posts',
-        element: <MyPosts></MyPosts>
+        path: "/my-posts",
+        element: <MyPosts></MyPosts>,
       },
       {
-        path: '/about',
-        element: <About></About>
-      }
-      , {
-        path: '/settings',
-        element: <Settings></Settings>
+        path: "/about",
+        element: <About></About>,
       },
       {
-        path: '/singlepetpage',
-        element: <SinglePetPage></SinglePetPage>
-      }
-
+        path: "/settings",
+        element: <Settings></Settings>,
+      },
+      {
+        path: "/singlepetpage",
+        element: <SinglePetPage></SinglePetPage>,
+      },
     ],
   },
 ]);
