@@ -4,7 +4,7 @@ import CardSection from "../../component/CardSection";
 
 import HeroSection from "../../component/HeroSection";
 import PlanningAdapSection from "../../component/PlanningAdapSection";
-import LoginForm from "../../component/Signin/Signin";
+import GetPetById from "../GetPetById/GetPetById";
 
 class Homepage extends React.Component {
   render() {

@@ -4,6 +4,7 @@ import LoginForm from "../../component/Signin/Signin";
 import Signin from "../../component/Signin/Signin";
 import Signup from "../../component/Signup/Signup";
 import Main from "../../Layout/Main";
+import GetPetById from "../../Pages/GetPetById/GetPetById";
 
 import Homepage from "../../Pages/Homepage/Homepage";
 import About from "../../Pages/Profile/About/About";
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/singlepetpage",
         element: <SinglePetPage></SinglePetPage>,
+      },
+      {
+        path: "/petById",
+        element: <GetPetById></GetPetById>,
       },
     ],
   },
