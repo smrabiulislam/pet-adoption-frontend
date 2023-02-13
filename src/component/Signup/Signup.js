@@ -21,24 +21,36 @@ class Signup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     // Implement your submit logic here
-    const infos = this.state;
-    console.log(infos);
-    fetch("http://localhost:5000/signup", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(infos),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast("Service added successfully!", {
-            icon: "👏",
-          });
-        }
-      });
+
+    if (this.state.password === this.state.confirmPassword) {
+      console.log(this.state.password);
+      const infos = {
+        email: this.state.email,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        photo: this.state.photo,
+        password: this.state.password,
+      };
+      console.log(infos);
+      fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(infos),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.acknowledged) {
+            toast("Service added successfully!", {
+              icon: "👏",
+            });
+          }
+        });
+    } else {
+      alert("Password is wrong");
+    }
   };
 
   render() {
