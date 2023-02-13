@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 
 import toast from "react-hot-toast";
 
@@ -10,6 +11,14 @@ class Signup extends Component {
     photo: "",
     password: "",
     confirmPassword: "",
+    imageFile: null,
+    imageUrl: null,
+  };
+
+  // img url
+
+  handleFileSelect = (event) => {
+    this.setState({ imageFile: event.target.files[0] });
   };
 
   handleInputChange = (event) => {
@@ -20,6 +29,30 @@ class Signup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    // img code
+
+    const formData = new FormData();
+    formData.append('image', this.state.imageFile);
+
+    fetch('https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ imageUrl: data.data.url });
+      })
+      .catch((error) => {
+        console.error('Error uploading image:', error);
+      });
+
+
+
+
     // Implement your submit logic here
     const infos = this.state;
     console.log(infos);
@@ -89,9 +122,11 @@ class Signup extends Component {
               className="form-control"
               id="photo"
               name="photo"
-              onChange={this.handleInputChange}
+              onChange={this.handleFileSelect}
             />
           </div>
+
+
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
