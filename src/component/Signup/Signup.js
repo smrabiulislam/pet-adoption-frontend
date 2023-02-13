@@ -48,6 +48,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
             <input
+              required
               type="text"
               className="form-control"
               id="firstName"
@@ -59,6 +60,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="lastName">Last Name:</label>
             <input
+              required
               type="text"
               className="form-control"
               id="lastName"
@@ -70,6 +72,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="email">Email Address:</label>
             <input
+              required
               type="email"
               className="form-control"
               id="email"
@@ -81,6 +84,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="photo">Photo:</label>
             <input
+              required
               type="file"
               className="form-control"
               id="photo"
@@ -91,6 +95,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
+              required
               type="password"
               className="form-control"
               id="password"
@@ -102,6 +107,7 @@ class Signup extends Component {
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirm Password:</label>
             <input
+              required
               type="password"
               className="form-control"
               id="confirmPassword"
@@ -111,7 +117,7 @@ class Signup extends Component {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Sign up
+            Sign Up
           </button>
         </form>
       </div>

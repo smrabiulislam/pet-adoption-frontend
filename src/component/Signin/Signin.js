@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 class LoginForm extends Component {
   state = {
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -28,7 +28,7 @@ class LoginForm extends Component {
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          toast.success("Now you are our member!");
+          toast.success("Now you are our logged in!");
         }
       });
   };
@@ -37,14 +37,15 @@ class LoginForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Email:</label>
           <input
             type="text"
             className="form-control"
-            id="username"
-            name="username"
-            value={this.state.username}
+            id="email"
+            name="email"
+            value={this.state.email}
             onChange={this.handleChange}
+            required
           />
         </div>
         <div className="form-group">
@@ -56,10 +57,11 @@ class LoginForm extends Component {
             name="password"
             value={this.state.password}
             onChange={this.handleChange}
+            required
           />
         </div>
         <button type="submit" className="btn btn-primary">
-          Submit
+          Log In
         </button>
       </form>
     );
