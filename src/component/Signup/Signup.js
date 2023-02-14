@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 
-
 import toast from "react-hot-toast";
-
+import AuthContexts from "../context/authContext";
 
 class Signup extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      show: true
-    }
+      show: true,
+    };
   }
 
   state = {
@@ -23,10 +21,7 @@ class Signup extends Component {
     photo: "",
   };
 
-
   // img url
-
-
 
   handleInputChange = (event) => {
     this.setState({
@@ -37,32 +32,24 @@ class Signup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-
-
     const image = event.target.image.files[0];
     // img code
 
-    const formData = new FormData()
-    formData.append('image', image)
-
-    const url = 'https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642'
+    const formData = new FormData();
+    formData.append("image", image);
+    const { signUp, logIn } = this.context;
+    const url =
+      "https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642";
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       body: formData,
     })
-      .then(res => res.json())
-      .then(imageData => {
-
+      .then((res) => res.json())
+      .then((imageData) => {
         if (imageData.success) {
-
           const userInfo = {
-
             photo: imageData.data.url,
-
-
-
-          }
-
+          };
 
           if (this.state.password === this.state.confirmPassword) {
             console.log(this.state.password);
@@ -73,39 +60,14 @@ class Signup extends Component {
               photo: imageData.data.url,
               password: this.state.password,
             };
-            console.log(infos);
-            fetch("http://localhost:5000/signup", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(infos),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
-                if (data.acknowledged) {
-
-                  toast("Service added successfully!", {
-                    icon: "👏",
-                  });
-                  this.setState({ show: false });
-                }
-              });
+            signUp(infos);
           } else {
             alert("Password is wrong");
           }
-
-
         }
-      }
-      )
-
-
+      });
 
     // Implement your submit logic here
-
-
   };
 
   render() {
@@ -160,7 +122,6 @@ class Signup extends Component {
             />
           </div>
 
-
           <div className="form-group">
             <label htmlFor="password">Password:</label>
             <input
@@ -193,5 +154,5 @@ class Signup extends Component {
     );
   }
 }
-
+Signup.contextType = AuthContexts;
 export default Signup;
