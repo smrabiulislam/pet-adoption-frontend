@@ -10,13 +10,24 @@ import {
 import { Link } from "react-router-dom";
 
 class TopHeader extends React.Component {
+  state = {
+    user: {}
+  };
+
+  componentDidMount() {
+    fetch(`http://localhost:5000/user?email=${user?.email}`)
+      .then(response => response.json())
+      .then(user => this.setState({ user }));
+  }
   render() {
+    const { user } = this.state;
+
     return (
       <Navbar bg="primary" variant="dark">
         <Container>
           <div className="d-flex justify-content-between align-items-center w-100">
             <div className="text-light">
-              Welcome, <Link to='/profile' className="text-light">Default Name</Link>
+              Welcome, <Link to='/profile' className="text-light">{user?.firstName}</Link>
             </div>
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div>
