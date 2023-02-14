@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import toast from "react-hot-toast";
+import AuthContexts from "../context/authContext";
 
 class LoginForm extends Component {
   state = {
@@ -16,21 +17,12 @@ class LoginForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(this.state),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast.success("Now you are our logged in!");
-        }
-      });
+
+    const { signUp, logIn } = this.context;
+
+    const logInInfo = this.state;
+
+    logIn(logInInfo);
   };
 
   render() {
@@ -67,5 +59,7 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.contextType = AuthContexts;
 
 export default LoginForm;
