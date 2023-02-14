@@ -15,7 +15,7 @@ class TopHeader extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:5000/user?email=${user?.email}`)
+    fetch('http://localhost:5000/user?email=aremon86851@gmail.com')
       .then(response => response.json())
       .then(user => this.setState({ user }));
   }
