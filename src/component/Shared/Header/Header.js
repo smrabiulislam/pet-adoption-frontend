@@ -132,7 +132,7 @@ class Header extends React.Component {
                     <Modal.Title>Sign Up</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Signup></Signup>
+                    <Signup close={this.handleSignUpClose}></Signup>
                   </Modal.Body>
                   <Modal.Footer>
                     <Button
@@ -143,17 +143,7 @@ class Header extends React.Component {
                     </Button>
                   </Modal.Footer>
 
-                  <Modal.Footer className="social-login grid">
-                    <Button variant="primary" className="facebook col">
-                      <FaFacebookF /> Facebook
-                    </Button>
-                    <Button variant="primary" className="github col">
-                      <FaGithub /> GitHub
-                    </Button>
-                    <Button variant="primary" className="google col">
-                      <FaGoogle /> Google
-                    </Button>
-                  </Modal.Footer>
+
                 </Modal>
 
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">

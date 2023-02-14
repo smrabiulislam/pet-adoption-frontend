@@ -1,9 +1,18 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+
 
 import toast from "react-hot-toast";
 
+
 class Signup extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: true
+    }
+  }
+
   state = {
     firstName: "",
     lastName: "",
@@ -11,15 +20,13 @@ class Signup extends Component {
     photo: "",
     password: "",
     confirmPassword: "",
-    imageFile: null,
-    imageUrl: null,
+    photo: "",
   };
+
 
   // img url
 
-  handleFileSelect = (event) => {
-    this.setState({ imageFile: event.target.files[0] });
-  };
+
 
   handleInputChange = (event) => {
     this.setState({
@@ -30,60 +37,75 @@ class Signup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+
+
+    const image = event.target.image.files[0];
     // img code
 
-    const formData = new FormData();
-    formData.append('image', this.state.imageFile);
+    const formData = new FormData()
+    formData.append('image', image)
 
-    fetch('https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642', {
+    const url = 'https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642'
+    fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
       body: formData,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ imageUrl: data.data.url });
-      })
-      .catch((error) => {
-        console.error('Error uploading image:', error);
-      });
+      .then(res => res.json())
+      .then(imageData => {
 
+        if (imageData.success) {
+
+          const userInfo = {
+
+            photo: imageData.data.url,
+
+
+
+          }
+
+
+          if (this.state.password === this.state.confirmPassword) {
+            console.log(this.state.password);
+            const infos = {
+              email: this.state.email,
+              firstName: this.state.firstName,
+              lastName: this.state.lastName,
+              photo: imageData.data.url,
+              password: this.state.password,
+            };
+            console.log(infos);
+            fetch("http://localhost:5000/signup", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(infos),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                if (data.acknowledged) {
+
+                  toast("Service added successfully!", {
+                    icon: "👏",
+                  });
+                  this.setState({ show: false });
+                }
+              });
+          } else {
+            alert("Password is wrong");
+          }
+
+
+        }
+      }
+      )
 
 
 
     // Implement your submit logic here
 
-    if (this.state.password === this.state.confirmPassword) {
-      console.log(this.state.password);
-      const infos = {
-        email: this.state.email,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        photo: this.state.photo,
-        password: this.state.password,
-      };
-      console.log(infos);
-      fetch("http://localhost:5000/signup", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(infos),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.acknowledged) {
-            toast("Service added successfully!", {
-              icon: "👏",
-            });
-          }
-        });
-    } else {
-      alert("Password is wrong");
-    }
+
   };
 
   render() {
@@ -132,8 +154,8 @@ class Signup extends Component {
               required
               type="file"
               className="form-control"
-              id="photo"
-              name="photo"
+              id="image"
+              name="image"
               onChange={this.handleFileSelect}
             />
           </div>
