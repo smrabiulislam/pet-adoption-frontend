@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import toast from "react-hot-toast";
+import AuthContexts from "../context/authContext";
 
 class Signup extends Component {
   state = {
@@ -136,5 +137,5 @@ class Signup extends Component {
     );
   }
 }
-
+Signup.contextType = AuthContexts;
 export default Signup;
