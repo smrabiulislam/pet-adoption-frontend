@@ -47,9 +47,9 @@ class Signup extends Component {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
-          const userInfo = {
+          /* const userInfo = {
             photo: imageData.data.url,
-          };
+          }; */
 
           if (this.state.password === this.state.confirmPassword) {
             const infos = {

@@ -3,8 +3,10 @@ import { toast } from "react-hot-toast";
 import Profile from "../Profile";
 
 class AddPet extends Component {
+
   state = {
     name: "",
+    // ownerEmail: JSON.parse(localStorage.getItem('userEmail')),
     type: "",
     adoptionStatus: "",
     height: "",
@@ -12,12 +14,15 @@ class AddPet extends Component {
     color: "",
     hypoallergenic: "",
     dietaryRestrictions: "",
-    uploadPhoto: "",
+    image: "",
     breedOfAnimal: "",
     address: "",
     price: "",
     additionalInformation: "",
   };
+
+
+
 
   handleChange = (e) => {
     this.setState({
@@ -27,24 +32,77 @@ class AddPet extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    fetch("http://localhost:5000/pet", {
+    // console.log(this.state);
+
+
+    const image = e.target.image.files[0];
+    // img code
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url =
+      "https://api.imgbb.com/1/upload?key=c993754e5e7bdf8ca9412defbbd79642";
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(this.state),
+      body: formData,
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          toast.success("Now you are our logged in!");
+      .then((imageData) => {
+        if (imageData.success) {
+
+          console.log(imageData.data.url);
+          toast.success("Photo Updated");
+
+          const petInfo = {
+
+            name: this.state.name,
+            // ownerEmail: JSON.parse(localStorage.getItem('userEmail')),
+            type: this.state.type,
+            adoptionStatus: this.state.adoptionStatus,
+            height: this.state.height,
+            weight: this.state.weight,
+            color: this.state.color,
+            hypoallergenic: this.state.hypoallergenic,
+            dietaryRestrictions: this.state.dietaryRestrictions,
+            image: imageData.data.url,
+            breedOfAnimal: this.state.breedOfAnimal,
+            address: this.state.address,
+            price: this.state.price,
+            additionalInformation: this.state.additionalInformation,
+          };
+
+          console.log(petInfo);
+
+
+          fetch("http://localhost:5000/pet", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(petInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.acknowledged) {
+                toast.success("Your Data has been recorded");
+              }
+            });
         }
-      });
+      })
+
+
+
+
+
+
   };
 
+
+
   render() {
+
     return (
       <div className="mb-5">
         <Profile></Profile>
@@ -194,15 +252,15 @@ class AddPet extends Component {
           <div className="row mb-4">
             <div className="col">
               <div class="form-outline ">
-                <label class="form-label" for="inputGroupFile01">
+                <label class="form-label" for="image">
                   Upload Photo
                 </label>
                 <input
                   type="file"
                   class="form-control"
-                  id="inputGroupFile01"
-                  name="uploadPhoto"
-                  value={this.state.uploadPhoto}
+                  id="image"
+                  name="image"
+                  value={this.state.image}
                   onChange={this.handleChange}
                 />
               </div>

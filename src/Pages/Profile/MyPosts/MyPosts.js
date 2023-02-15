@@ -1,73 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Profile from '../Profile';
-import Pet1 from '../../../images/pet1.jpg';
+
 import { Link } from 'react-router-dom';
 
-const MyPosts = () => {
-    return (
-        <div>
-            <Profile></Profile>
+class MyPosts extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pets: [],
+            isLoading: true,
+            error: null
+        };
+    }
 
-            <h1 className='text-center mb-5'>My All Pets Collection</h1>
+    componentDidMount() {
+        fetch('http://localhost:5000/pets')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong...');
+                }
+            })
+            .then(data => {
+                this.setState({ pets: data, isLoading: false });
+            })
+            .catch(error => {
+                this.setState({ error, isLoading: false });
+            });
+    }
 
-            <div class="row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto mb-5">
-                <div class="col">
-                    <div class="card h-100">
-                        <img src={Pet1} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h3 class="card-title">Pet’s name </h3>
-                            <h5> Pet’s current status (foster/adopted) </h5>
+    render() {
+        const { pets, isLoading, error } = this.state;
+        console.log(pets);
+        if (error) {
+            return <p>{error.message}</p>;
+        }
 
-                            <Link to='/singlepetpage'>
-                                <button type="button" class="btn btn-outline-primary my-3">View Details</button>
-                            </Link>
-                        </div>
-                    </div>
+        if (isLoading) {
+            return <p>Loading...</p>;
+        }
+        return (
+            <div>
+                <Profile></Profile>
+
+                <h1 className='text-center mb-5'>My All Pets Collection</h1>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4 w-75 mx-auto mb-5">
+
+
+                    {
+                        pets.map(pet => <div key={pet._id} class="col">
+                            <div class="card " >
+                                <img style={{ height: `350px` }} src={pet?.image} class="card-img-top" alt="..." />
+                                <div class="card-body">
+                                    <h3 class="card-title">Pet’s name </h3>
+                                    <h5> Pet’s current status (foster/adopted) </h5>
+
+                                    <Link to='/singlepetpage'>
+                                        <button type="button" class="btn btn-outline-primary my-3">View Details</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+
+
+
+
+
                 </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src={Pet1} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h3 class="card-title">Pet’s name </h3>
-                            <h5> Pet’s current status (foster/adopted) </h5>
-
-                            <Link to='/singlepetpage'>
-                                <button type="button" class="btn btn-outline-primary my-3">View Details</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src={Pet1} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h3 class="card-title">Pet’s name </h3>
-                            <h5> Pet’s current status (foster/adopted) </h5>
-
-                            <Link to='/singlepetpage'>
-                                <button type="button" class="btn btn-outline-primary my-3">View Details</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src={Pet1} class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h3 class="card-title">Pet’s name </h3>
-                            <h5> Pet’s current status (foster/adopted) </h5>
-
-                            <Link to='/singlepetpage'>
-                                <button type="button" class="btn btn-outline-primary my-3">View Details</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default MyPosts;
