@@ -12,6 +12,7 @@ import TopHeader from "./TopHeader";
 import { Link } from "react-router-dom";
 import LoginForm from "../../Signin/Signin";
 import Signup from "../../Signup/Signup";
+import AuthContexts from "../../context/authContext";
 
 // import NavDropdown from "react-bootstrap/NavDropdown";
 class Header extends React.Component {
@@ -53,6 +54,10 @@ class Header extends React.Component {
   };
 
   render() {
+    const { logOut, sign } = this.context;
+    const handleLogOut = () => {
+      logOut();
+    };
     return (
       <>
         <TopHeader></TopHeader>
@@ -80,6 +85,15 @@ class Header extends React.Component {
                     Login
                   </Button>
                 </Nav.Link>
+                {sign === true && (
+                  <>
+                    <Nav.Link>
+                      <Button variant="outline-primary" onClick={handleLogOut}>
+                        Log Out
+                      </Button>
+                    </Nav.Link>
+                  </>
+                )}
 
                 {/* sign in modal */}
 
@@ -142,8 +156,6 @@ class Header extends React.Component {
                       Close
                     </Button>
                   </Modal.Footer>
-
-
                 </Modal>
 
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
@@ -164,5 +176,7 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.contextType = AuthContexts;
 
 export default Header;

@@ -52,7 +52,6 @@ class Signup extends Component {
           };
 
           if (this.state.password === this.state.confirmPassword) {
-            console.log(this.state.password);
             const infos = {
               email: this.state.email,
               firstName: this.state.firstName,

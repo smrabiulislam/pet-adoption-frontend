@@ -3,8 +3,11 @@ import { toast } from "react-hot-toast";
 
 const AuthContexts = React.createContext();
 export class AuthContext extends Component {
-  state = {};
+  state = {
+    sign: {},
+  };
   signUp = (info) => {
+    this.setState({ sign: info });
     fetch("http://localhost:5000/signup", {
       method: "POST",
       headers: {
@@ -14,12 +17,11 @@ export class AuthContext extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
+          localStorage.setItem("signUp", JSON.stringify(info));
           toast("Service added successfully!", {
             icon: "👏",
           });
-          this.setState({ show: false });
         }
       });
   };
@@ -39,12 +41,21 @@ export class AuthContext extends Component {
         }
       });
   };
+  logOut = () => {
+    const { sign } = this.state;
+    if (sign) {
+      this.setState({ sign: {} });
+      console.log(sign);
+    }
+  };
 
   render() {
-    const { logIn, signUp } = this;
+    const { sign } = this.state;
+    const { logIn, signUp, logOut } = this;
+    console.log(sign);
     return (
       <>
-        <AuthContexts.Provider value={{ logIn, signUp }}>
+        <AuthContexts.Provider value={{ logIn, signUp, sign, logOut }}>
           {this.props.children}
         </AuthContexts.Provider>
       </>
