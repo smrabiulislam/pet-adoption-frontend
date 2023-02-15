@@ -1,4 +1,4 @@
-import React, { useState, Component, useContext } from "react";
+import React, { useState, Component, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -52,8 +52,11 @@ class Header extends React.Component {
   handleSignUpClose = () => {
     this.setState({ show: false });
   };
-
   render() {
+    const signUpItem = localStorage.getItem("signUp");
+    const logInItem = localStorage.getItem("logIn");
+    const parseItem = JSON.parse(signUpItem);
+    const parseItemLogin = JSON.parse(logInItem);
     const { logOut, sign } = this.context;
     const handleLogOut = () => {
       logOut();
@@ -66,7 +69,10 @@ class Header extends React.Component {
             <Navbar.Brand href="/">Pet Adoption</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
-              <Form className="d-flex w-100 justify-content-center">
+              <Form
+                className="d-flex w-100 justify-content-center"
+                style={{ maxWidth: "75%" }}
+              >
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -85,15 +91,17 @@ class Header extends React.Component {
                     Login
                   </Button>
                 </Nav.Link>
-                {sign === true && (
-                  <>
-                    <Nav.Link>
-                      <Button variant="outline-primary" onClick={handleLogOut}>
-                        Log Out
-                      </Button>
-                    </Nav.Link>
-                  </>
-                )}
+                <>
+                  <Nav.Link>
+                    <Button
+                      variant="outline-primary"
+                      onClick={handleLogOut}
+                      className={signUpItem || logInItem ? "d-block" : "d-none"}
+                    >
+                      Log Out
+                    </Button>
+                  </Nav.Link>
+                </>
 
                 {/* sign in modal */}
 

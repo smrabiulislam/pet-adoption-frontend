@@ -14,6 +14,7 @@ import MyPosts from "../../Pages/Profile/MyPosts/MyPosts";
 import ProfilePage from "../../Pages/Profile/ProfilePage/ProfilePage";
 import Settings from "../../Pages/Profile/Settings/Settings";
 import SinglePetPage from "../../Pages/Profile/SinglePetPage/SinglePetPage";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -26,17 +27,12 @@ const router = createBrowserRouter([
         element: <Homepage></Homepage>,
       },
       {
-        path: "/signin",
-        element: <Signin></Signin>,
-      },
-      {
-        path: "/signup",
-        element: <Signup></Signup>,
-      },
-
-      {
         path: "/profile",
-        element: <ProfilePage></ProfilePage>,
+        element: (
+          <PrivateRoutes>
+            <ProfilePage></ProfilePage>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/add-pet",

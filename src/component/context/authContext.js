@@ -26,6 +26,7 @@ export class AuthContext extends Component {
       });
   };
   logIn = (info) => {
+    localStorage.setItem("logIn", JSON.stringify(info));
     fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
@@ -42,17 +43,14 @@ export class AuthContext extends Component {
       });
   };
   logOut = () => {
-    const { sign } = this.state;
-    if (sign) {
-      this.setState({ sign: {} });
-      console.log(sign);
-    }
+    localStorage.clear();
   };
 
   render() {
     const { sign } = this.state;
     const { logIn, signUp, logOut } = this;
     console.log(sign);
+
     return (
       <>
         <AuthContexts.Provider value={{ logIn, signUp, sign, logOut }}>
