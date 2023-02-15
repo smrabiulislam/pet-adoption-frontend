@@ -54,6 +54,10 @@ class Header extends React.Component {
   };
 
   render() {
+    const { logOut, sign } = this.context;
+    const handleLogOut = () => {
+      logOut();
+    };
     return (
       <>
         <TopHeader></TopHeader>
