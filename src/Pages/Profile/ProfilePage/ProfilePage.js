@@ -1,38 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Profile from '../Profile';
-import Pet from '../../../images/pet1.jpg';
-
-const ProfilePage = () => {
-    return (
-        <div>
-            <Profile></Profile>
-
-            <div class="card mb-3 mx-auto w-75 mb-5" >
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src={Pet} class="img-fluid rounded-start" alt="..." />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h1 class="card-title">Md Shijan Ali</h1>
-                            <h4>(Front End Developer)</h4>
-                            <p class="card-text">I'm Md Shijan Ali as A Professional Front End Developer. I have worked and studied in this field last 3 years. I have completed some full-stack applications using Mern Stack Truck. I'm a student of Mechanical Engineering. But I loved Coding. So I moved into this field. I also worked in WordPress last 3 years for some international Companies on Fiverr.</p>
 
 
-                            <h4 className='mt-5 mb-3'>Personal Information:</h4>
-                            <h6>Email: shijan135@gmail.com</h6>
-                            <h6>Phone: +880 1571261165</h6>
-                            <h6>Address: Dinajpur, Bangladesh</h6>
-                            <h6>Nationality: Bangladeshi</h6>
+class ProfilePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+            loading: true,
+            error: null
+        };
+    }
+
+    componentDidMount() {
+        const userEmail = localStorage.getItem('userEmail');
+        const user = JSON.parse(userEmail);
+        const url = `http://localhost:5000/user?email=${user}`;
+        console.log(url);
+        fetch(url)
+            .then(response => response.json())
+            .then(user => this.setState({ user }));
+    }
+    render() {
+        const { user } = this.state;
+        return (
+            <div>
+                <Profile></Profile>
+
+                <div class="card mb-3 mx-auto w-75 mb-5" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src={user?.photo} class="img-fluid rounded-start" alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h1 class="card-title">{user?.firstName} {user?.lastName}</h1>
+                                <h4>{user?.title ? user?.title : 'Title'}</h4>
+                                <p class="card-text">{user?.bio ? user?.bio : "User Bio"}</p>
+
+
+                                <h4 className='mt-5 mb-3'>Personal Information:</h4>
+                                <h6>Email: {user?.email}</h6>
+                                <h6>Phone: {user?.phone ? user?.phone : '+880 1571261165'}</h6>
+                                <h6>Address: {user?.address ? user?.address : ''}</h6>
+                                <h6>Nationality: {user?.nationality ? user?.nationality : ''}</h6>
 
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default ProfilePage;

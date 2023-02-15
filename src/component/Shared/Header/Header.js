@@ -53,8 +53,8 @@ class Header extends React.Component {
     this.setState({ show: false });
   };
   render() {
-    const signUpItem = localStorage.getItem("signUp");
-    const logInItem = localStorage.getItem("logIn");
+    const signUpItem = localStorage.getItem("userEmail");
+    const logInItem = localStorage.getItem("userEmail");
     const parseItem = JSON.parse(signUpItem);
     const parseItemLogin = JSON.parse(logInItem);
     const { logOut, sign } = this.context;

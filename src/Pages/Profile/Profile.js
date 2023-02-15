@@ -6,7 +6,27 @@ import './Profile.css';
 
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+            loading: true,
+            error: null
+        };
+    }
+
+    componentDidMount() {
+        const userEmail = localStorage.getItem('userEmail');
+        const user = JSON.parse(userEmail);
+        const url = `http://localhost:5000/user?email=${user}`;
+        console.log(url);
+        fetch(url)
+            .then(response => response.json())
+            .then(user => this.setState({ user }));
+    }
     render() {
+        const { user } = this.state;
+
         return (
             <>
 
@@ -20,15 +40,15 @@ class Profile extends React.Component {
 
                                     <div class="profile-header-cover"></div>
 
-                                    <div class="profile-header-content">
+                                    <div class="profile-header-content" >
 
-                                        <div class="profile-header-img">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" />
+                                        <div class="profile-header-img" style={{ width: `200px`, height: `200px` }}>
+                                            <img src={user?.photo} alt="" />
                                         </div>
 
-                                        <div class="profile-header-info">
-                                            <h4 class="m-t-10 m-b-5">Md Shijan Ali</h4>
-                                            <p class="m-b-10">UXUI + Frontend Developer</p>
+                                        <div class="profile-header-info " style={{ height: `200px`, marginLeft: `220px` }}>
+                                            <h4 class="m-t-10 m-b-5 " >{user?.firstName} {user?.lastName}</h4>
+                                            <p class="m-b-10">{user?.title ? user?.title : 'Title'}</p>
                                             <NavLink to="/settings" class="btn btn-sm btn-info mb-2">Edit Profile</NavLink>
                                         </div>
 

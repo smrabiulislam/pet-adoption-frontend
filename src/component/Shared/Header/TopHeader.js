@@ -10,17 +10,27 @@ import {
 import { Link } from "react-router-dom";
 
 class TopHeader extends React.Component {
-  state = {
-    user: {}
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      loading: true,
+      error: null
+    };
+  }
 
   componentDidMount() {
-    fetch('http://localhost:5000/user?email=aremon86851@gmail.com')
+    const userEmail = localStorage.getItem('userEmail');
+    const user = JSON.parse(userEmail);
+    const url = `http://localhost:5000/user?email=${user}`;
+    console.log(url);
+    fetch(url)
       .then(response => response.json())
       .then(user => this.setState({ user }));
   }
   render() {
     const { user } = this.state;
+
 
     return (
       <Navbar bg="primary" variant="dark">

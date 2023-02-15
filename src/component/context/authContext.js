@@ -18,7 +18,7 @@ export class AuthContext extends Component {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          localStorage.setItem("signUp", JSON.stringify(info));
+          localStorage.setItem("userEmail", JSON.stringify(info?.email));
           toast("Service added successfully!", {
             icon: "👏",
           });
@@ -26,7 +26,7 @@ export class AuthContext extends Component {
       });
   };
   logIn = (info) => {
-    localStorage.setItem("logIn", JSON.stringify(info));
+    localStorage.setItem("userEmail", JSON.stringify(info?.email));
     fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {

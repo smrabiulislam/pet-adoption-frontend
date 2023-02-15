@@ -6,11 +6,11 @@ class PrivateRoutes extends Component {
     userInfo: "",
   };
   render() {
-    const getItem = localStorage.getItem("signUp");
-    const getItemFormLogin = localStorage.getItem("logIn");
-    const parseItemFormLogin = JSON.parse(getItemFormLogin);
+    const getItem = localStorage.getItem("userEmail");
+    // const getItemFormLogin = localStorage.getItem("userEmail");
+    // const parseItemFormLogin = JSON.parse(getItemFormLogin);
     const parseItem = JSON.parse(getItem);
-    if (parseItem?.email || parseItemFormLogin?.email) {
+    if (parseItem) {
       console.log("email done");
       return this.props.children;
     } else {
