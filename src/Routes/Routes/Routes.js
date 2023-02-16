@@ -36,11 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-pet",
-        element: <AddPet></AddPet>,
+        element: <PrivateRoutes><AddPet></AddPet></PrivateRoutes>,
       },
       {
         path: "/my-posts",
-        element: <MyPosts></MyPosts>,
+        element: <PrivateRoutes><MyPosts></MyPosts></PrivateRoutes>,
       },
       {
         path: "/about",
@@ -48,16 +48,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings",
-        element: <Settings></Settings>,
-      },
-      {
-        path: "/singlepetpage",
-        element: <SinglePetPage></SinglePetPage>,
+        element: <PrivateRoutes><Settings></Settings></PrivateRoutes>,
       },
       {
         path: "/petById",
         element: <GetPetById></GetPetById>,
       },
+      {
+        path: '/pets/:id',
+        loader: ({ params }) => fetch(`http://localhost:5000/pets/${params.id}`),
+        element: <SinglePetPage></SinglePetPage>
+      }
     ],
   },
 ]);

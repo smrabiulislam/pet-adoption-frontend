@@ -1,18 +1,18 @@
-import React, { useState, Component, useContext, useEffect } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { FaGoogle, FaFacebookF, FaFacebook, FaGithub } from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
 
 import TopHeader from "./TopHeader";
-import { Link } from "react-router-dom";
+
 import LoginForm from "../../Signin/Signin";
 import Signup from "../../Signup/Signup";
 import AuthContexts from "../../context/authContext";
+import { toast } from "react-hot-toast";
 
 // import NavDropdown from "react-bootstrap/NavDropdown";
 class Header extends React.Component {
@@ -53,13 +53,21 @@ class Header extends React.Component {
     this.setState({ show: false });
   };
   render() {
-    const signUpItem = localStorage.getItem("userEmail");
-    const logInItem = localStorage.getItem("userEmail");
-    const parseItem = JSON.parse(signUpItem);
-    const parseItemLogin = JSON.parse(logInItem);
+    const user = localStorage.getItem("userEmail");
+    const userEmail = JSON.parse(user);
     const { logOut, sign } = this.context;
     const handleLogOut = () => {
-      logOut();
+      logOut()
+        .then(() => {
+          console.log('successfuly logout');
+          toast.success('You have logged Out Successfully!!')
+          if (!userEmail) {
+            return <a href="/profile"></a>;
+          }
+        })
+        .catch(error => {
+          console.error('error', error.message)
+        })
     };
     return (
       <>
@@ -86,22 +94,43 @@ class Header extends React.Component {
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link>
-                  <Button variant="outline-primary" onClick={this.handleShow}>
-                    Login
-                  </Button>
-                </Nav.Link>
-                <>
-                  <Nav.Link>
-                    <Button
-                      variant="outline-primary"
-                      onClick={handleLogOut}
-                      className={signUpItem || logInItem ? "d-block" : "d-none"}
-                    >
-                      Log Out
-                    </Button>
-                  </Nav.Link>
-                </>
+
+
+                {
+                  userEmail ? <>
+                    <Nav.Link>
+                      <Button
+                        variant="outline-primary"
+                        onClick={handleLogOut}
+                        className={user || user ? "d-block" : "d-none"}
+                      >
+                        Log Out
+                      </Button>
+                    </Nav.Link>
+                  </> :
+
+                    <>
+
+                      <Nav.Link>
+                        <Button variant="outline-primary" onClick={this.handleShow}>
+                          Login
+                        </Button>
+                      </Nav.Link>
+
+                      <Nav.Link>
+                        <Button
+                          variant="outline-primary"
+                          onClick={this.handleSignUpShow}
+                        >
+                          Signup
+                        </Button>
+                      </Nav.Link>
+
+                    </>
+                }
+
+
+
 
                 {/* sign in modal */}
 
@@ -120,32 +149,11 @@ class Header extends React.Component {
                       Forgot Password
                     </Link>
                   </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                  <Modal.Footer className="social-login grid">
-                    <Button variant="primary" className="facebook col">
-                      <FaFacebookF /> Facebook
-                    </Button>
-                    <Button variant="primary" className="github col">
-                      <FaGithub /> GitHub
-                    </Button>
-                    <Button variant="primary" className="google col">
-                      <FaGoogle /> Google
-                    </Button>
-                  </Modal.Footer>
+
+
                 </Modal>
 
-                <Nav.Link>
-                  <Button
-                    variant="outline-primary"
-                    onClick={this.handleSignUpShow}
-                  >
-                    Signup
-                  </Button>
-                </Nav.Link>
+
 
                 {/* Signup modal code */}
 
@@ -156,14 +164,7 @@ class Header extends React.Component {
                   <Modal.Body>
                     <Signup close={this.handleSignUpClose}></Signup>
                   </Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      variant="secondary"
-                      onClick={this.handleSignUpClose}
-                    >
-                      Close
-                    </Button>
-                  </Modal.Footer>
+
                 </Modal>
 
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">

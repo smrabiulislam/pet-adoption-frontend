@@ -85,7 +85,7 @@ class Signup extends Component {
               onChange={this.handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mt-3">
             <label htmlFor="lastName">Last Name:</label>
             <input
               required
@@ -97,7 +97,7 @@ class Signup extends Component {
               onChange={this.handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mt-3">
             <label htmlFor="email">Email Address:</label>
             <input
               required
@@ -109,7 +109,7 @@ class Signup extends Component {
               onChange={this.handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mt-3">
             <label htmlFor="photo">Photo:</label>
             <input
               required
@@ -121,7 +121,7 @@ class Signup extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mt-3">
             <label htmlFor="password">Password:</label>
             <input
               required
@@ -133,7 +133,7 @@ class Signup extends Component {
               onChange={this.handleInputChange}
             />
           </div>
-          <div className="form-group">
+          <div className="form-group mt-3">
             <label htmlFor="confirmPassword">Confirm Password:</label>
             <input
               required
@@ -145,7 +145,7 @@ class Signup extends Component {
               onChange={this.handleInputChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary mt-3">
             Sign Up
           </button>
         </form>

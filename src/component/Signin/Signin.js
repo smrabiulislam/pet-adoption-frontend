@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 
-import toast from "react-hot-toast";
 import AuthContexts from "../context/authContext";
 
 class LoginForm extends Component {
@@ -26,6 +26,7 @@ class LoginForm extends Component {
   };
 
   render() {
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -40,7 +41,7 @@ class LoginForm extends Component {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group mt-3">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -52,7 +53,7 @@ class LoginForm extends Component {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary mt-3">
           Log In
         </button>
       </form>

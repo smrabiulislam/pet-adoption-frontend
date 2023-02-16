@@ -1,21 +1,31 @@
-import React from "react";
-import Pet from "../../../images/pet1.jpg";
+/* import React from "react";
 
-const RightSide = () => {
+
+
+const RightSide = ({ petDetails }) => {
+
+
+
+
+  const { name, type, adoptionStatus, height, weight, color, hypoallergenic, dietaryRestrictions, uploadPhoto, breedOfAnimal, address, price, additionalInformation } = petDetails;
   return (
     <div>
       <div class="card ">
-        <img src={Pet} class="card-img-top" alt="..." />
+        <img src={uploadPhoto} class="card-img-top" alt="..." />
         <div class="card-body">
-          <h1 class="card-title">Pet Name</h1>
-          <h4>Adoption Status: </h4>
-          <h4> Height: </h4>
-          <h4> Weight:</h4>
-          <h4>Color: </h4>
+          <h1 class="card-title">{name}</h1>
+          <h4>Adoption Status: {adoptionStatus}</h4>
+          <h4>Type: {type}</h4>
+          <h4> Height: {height}</h4>
+          <h4> Weight: {weight}</h4>
+          <h4>Color: {color}</h4>
           <h4>Bio: </h4>
-          <h4> Hypoallergenic (yes/no): </h4>
-          <h4> dietary restrictions: </h4>
-          <h4> breed of animal : </h4>
+          <h4> Hypoallergenic (yes/no): {hypoallergenic}</h4>
+          <h4> dietary restrictions: {dietaryRestrictions}</h4>
+          <h4> breed of animal : {breedOfAnimal}</h4>
+          <h4> Address : {address}</h4>
+          <h4> AdditionalInformation : {additionalInformation}</h4>
+          <h4> Price : ${price}</h4>
 
           <div
             class="btn-group"
@@ -43,3 +53,4 @@ const RightSide = () => {
 };
 
 export default RightSide;
+ */

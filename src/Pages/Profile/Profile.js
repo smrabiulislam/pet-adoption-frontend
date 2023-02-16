@@ -43,7 +43,7 @@ class Profile extends React.Component {
                                     <div class="profile-header-content" >
 
                                         <div class="profile-header-img" style={{ width: `200px`, height: `200px` }}>
-                                            <img src={user?.photo} alt="" />
+                                            <img style={{ width: `100%`, height: `100%` }} src={user?.photo} alt="" />
                                         </div>
 
                                         <div class="profile-header-info " style={{ height: `200px`, marginLeft: `220px` }}>

@@ -43,7 +43,7 @@ class TopHeader extends React.Component {
               <div>
                 <span className="text-light">
                   <FaEnvelope className="me-2" />
-                  admin@petadoption.com
+                  {user?.email}
                 </span>
               </div>
               <div>
