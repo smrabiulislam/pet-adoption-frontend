@@ -10,10 +10,10 @@ const RightSide = ({ petDetails }) => {
   const { name, type, adoptionStatus, height, weight, color, hypoallergenic, dietaryRestrictions, uploadPhoto, breedOfAnimal, address, price, additionalInformation } = petDetails;
   return (
     <div>
-      <div class="card ">
-        <img src={uploadPhoto} class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h1 class="card-title">{name}</h1>
+      <div className="card ">
+        <img src={uploadPhoto} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h1 className="card-title">{name}</h1>
           <h4>Adoption Status: {adoptionStatus}</h4>
           <h4>Type: {type}</h4>
           <h4> Height: {height}</h4>
@@ -28,21 +28,21 @@ const RightSide = ({ petDetails }) => {
           <h4> Price : ${price}</h4>
 
           <div
-            class="btn-group"
+            className="btn-group"
             role="group"
             aria-label="Basic mixed styles example"
           >
-            <button type="button" class="btn btn-danger">
+            <button type="button" className="btn btn-danger">
               {" "}
               Return Pet
             </button>
-            <button type="button" class="btn btn-warning">
+            <button type="button" className="btn btn-warning">
               Adopt
             </button>
-            <button type="button" class="btn btn-success">
+            <button type="button" className="btn btn-success">
               Foster
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" className="btn btn-primary">
               Save
             </button>
           </div>

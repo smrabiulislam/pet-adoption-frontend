@@ -19,9 +19,10 @@ export class AuthContext extends Component {
       .then((data) => {
         if (data.acknowledged) {
           localStorage.setItem("userEmail", JSON.stringify(info?.email));
-          toast("Service added successfully!", {
+          toast("Successfully Sign up!", {
             icon: "👏",
           });
+          window.location.reload();
         }
       });
   };
@@ -36,14 +37,15 @@ export class AuthContext extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
+        if (data?.email) {
           toast.success("Now you are our logged in!");
+          window.location.reload();
         }
       });
   };
   logOut = () => {
     localStorage.clear();
+    window.location.reload();
   };
 
   render() {

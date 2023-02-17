@@ -3,7 +3,6 @@ import { toast } from "react-hot-toast";
 import Profile from "../Profile";
 
 class AddPet extends Component {
-
   state = {
     name: "",
     // ownerEmail: JSON.parse(localStorage.getItem('userEmail')),
@@ -21,9 +20,6 @@ class AddPet extends Component {
     additionalInformation: "",
   };
 
-
-
-
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -33,7 +29,6 @@ class AddPet extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log(this.state);
-
 
     const image = e.target.image.files[0];
     // img code
@@ -50,12 +45,10 @@ class AddPet extends Component {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
-
           console.log(imageData.data.url);
           toast.success("Photo Updated");
 
           const petInfo = {
-
             name: this.state.name,
             // ownerEmail: JSON.parse(localStorage.getItem('userEmail')),
             type: this.state.type,
@@ -74,7 +67,6 @@ class AddPet extends Component {
 
           console.log(petInfo);
 
-
           fetch("http://localhost:5000/pet", {
             method: "POST",
             headers: {
@@ -87,22 +79,14 @@ class AddPet extends Component {
               console.log(data);
               if (data.acknowledged) {
                 toast.success("Your Data has been recorded");
+                window.location.reload();
               }
             });
         }
-      })
-
-
-
-
-
-
+      });
   };
 
-
-
   render() {
-
     return (
       <div className="mb-5">
         <Profile></Profile>
@@ -133,7 +117,7 @@ class AddPet extends Component {
                   Type (dog, cat)
                 </label>
                 <select
-                  class="form-select"
+                  className="form-select"
                   name="type"
                   value={this.state.type}
                   onChange={this.handleChange}
@@ -219,7 +203,7 @@ class AddPet extends Component {
                   Hypoallergenic (yes/no)
                 </label>
                 <select
-                  class="form-select"
+                  className="form-select"
                   name="hypoallergenic"
                   value={this.state.hypoallergenic}
                   onChange={this.handleChange}
@@ -251,13 +235,13 @@ class AddPet extends Component {
 
           <div className="row mb-4">
             <div className="col">
-              <div class="form-outline ">
-                <label class="form-label" for="image">
+              <div className="form-outline ">
+                <label className="form-label" for="image">
                   Upload Photo
                 </label>
                 <input
                   type="file"
-                  class="form-control"
+                  className="form-control"
                   id="image"
                   name="image"
                   value={this.state.image}
@@ -285,7 +269,7 @@ class AddPet extends Component {
 
           <div className="row mb-4">
             <div className="col">
-              <div class="form-outline ">
+              <div className="form-outline ">
                 <label className="form-label" for="form6Example4">
                   Address
                 </label>

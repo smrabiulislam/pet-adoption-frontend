@@ -4,10 +4,10 @@ import { FaFacebook, FaTwitter, FaInstagramSquare } from "react-icons/fa";
 class TopFooter extends React.Component {
   render() {
     return (
-      <footer class="bg-light py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
+      <footer className="bg-light py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3">
               <h5>About Us</h5>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -15,9 +15,9 @@ class TopFooter extends React.Component {
                 justo, vel laoreet nulla lacus ac magna.
               </p>
             </div>
-            <div class="col-md-3">
+            <div className="col-md-3">
               <h5>Customer Service</h5>
-              <ul class="list-unstyled">
+              <ul className="list-unstyled">
                 <li>
                   <a href="#">Contact Us</a>
                 </li>
@@ -29,9 +29,9 @@ class TopFooter extends React.Component {
                 </li>
               </ul>
             </div>
-            <div class="col-md-3">
+            <div className="col-md-3">
               <h5>My Account</h5>
-              <ul class="list-unstyled">
+              <ul className="list-unstyled">
                 <li>
                   <a href="#">Sign In</a>
                 </li>
@@ -43,20 +43,20 @@ class TopFooter extends React.Component {
                 </li>
               </ul>
             </div>
-            <div class="col-md-3">
+            <div className="col-md-3">
               <h5>Follow Us</h5>
-              <ul class="list-inline">
-                <li class="list-inline-item">
+              <ul className="list-inline">
+                <li className="list-inline-item">
                   <a href="#">
                     <FaFacebook />
                   </a>
                 </li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">
                   <a href="#">
                     <FaTwitter />
                   </a>
                 </li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">
                   <a href="#">
                     <FaInstagramSquare />
                   </a>

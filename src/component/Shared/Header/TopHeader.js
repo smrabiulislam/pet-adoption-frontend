@@ -15,29 +15,35 @@ class TopHeader extends React.Component {
     this.state = {
       data: null,
       loading: true,
-      error: null
+      error: null,
     };
+    this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
-    const userEmail = localStorage.getItem('userEmail');
+    this.fetchData();
+  }
+  fetchData() {
+    const userEmail = localStorage.getItem("userEmail");
     const user = JSON.parse(userEmail);
     const url = `http://localhost:5000/user?email=${user}`;
     console.log(url);
     fetch(url)
-      .then(response => response.json())
-      .then(user => this.setState({ user }));
+      .then((response) => response.json())
+      .then((user) => this.setState({ user }));
   }
   render() {
     const { user } = this.state;
-
 
     return (
       <Navbar bg="primary" variant="dark">
         <Container>
           <div className="d-flex justify-content-between align-items-center w-100">
             <div className="text-light">
-              Welcome, <Link to='/profile' className="text-light">{user?.firstName}</Link>
+              Welcome,{" "}
+              <Link to="/profile" className="text-light">
+                {user?.firstName}
+              </Link>
             </div>
             <div className="d-flex justify-content-center align-items-center gap-2">
               <div>
